@@ -1,0 +1,17 @@
+技术模块主要是Spring和Mybatis的包
+主要是就是用啥框架技术来实现。
+SpringMVC+Spring3.1.4+Mybatis
+
+引入title修改了包冲突
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+		原来是1.7.5
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		原来是1.2.17
