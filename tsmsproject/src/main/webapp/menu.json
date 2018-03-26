@@ -1,0 +1,16 @@
+{
+   "menus" : [{"icon" : "icon-sys","menuid" : "1","menuname" : "系统管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "用户管理","url" : "/tsmsproject/user/queryuser.action"
+                 }] 
+               },
+               {"icon" : "icon-sys","menuid" : "1","menuname" : "事件查看 ","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "事件查看","url" : "/tsmsproject/eventrec/eventrec/list.action"
+                 }] 
+               },
+             {"icon" : "icon-sys","menuid" : "1","menuname" : "操作日志 ","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "日志查询","url" : "/tsmsproject/log/log/list.action"
+                 }] 
+               }
+             ]
+}
+

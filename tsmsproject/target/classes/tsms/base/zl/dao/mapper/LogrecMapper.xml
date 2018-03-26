@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.LogrecMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Logrec" >
+    <id column="LOGID" property="logid" jdbcType="DECIMAL" />
+    <result column="USERID" property="userid" jdbcType="DECIMAL" />
+    <result column="FUNCTIONINFOID" property="functioninfoid" jdbcType="DECIMAL" />
+    <result column="LOGTIME" property="logtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOGID, USERID, FUNCTIONINFOID, LOGTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.LogrecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.LOGREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TSMS.LOGREC
+    where LOGID = #{logid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.LOGREC
+    where LOGID = #{logid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.LogrecExample" >
+    delete from TSMS.LOGREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.Logrec" >
+    insert into TSMS.LOGREC (LOGID, USERID, FUNCTIONINFOID, 
+      LOGTIME)
+    values (#{logid,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL}, #{functioninfoid,jdbcType=DECIMAL}, 
+      #{logtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.Logrec" >
+    insert into TSMS.LOGREC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        LOGID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="functioninfoid != null" >
+        FUNCTIONINFOID,
+      </if>
+      <if test="logtime != null" >
+        LOGTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=DECIMAL},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="functioninfoid != null" >
+        #{functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="logtime != null" >
+        #{logtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.LogrecExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.LOGREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.LOGREC
+    <set >
+      <if test="record.logid != null" >
+        LOGID = #{record.logid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.functioninfoid != null" >
+        FUNCTIONINFOID = #{record.functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.logtime != null" >
+        LOGTIME = #{record.logtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.LOGREC
+    set LOGID = #{record.logid,jdbcType=DECIMAL},
+      USERID = #{record.userid,jdbcType=DECIMAL},
+      FUNCTIONINFOID = #{record.functioninfoid,jdbcType=DECIMAL},
+      LOGTIME = #{record.logtime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.Logrec" >
+    update TSMS.LOGREC
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="functioninfoid != null" >
+        FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="logtime != null" >
+        LOGTIME = #{logtime,jdbcType=DATE},
+      </if>
+    </set>
+    where LOGID = #{logid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Logrec" >
+    update TSMS.LOGREC
+    set USERID = #{userid,jdbcType=DECIMAL},
+      FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL},
+      LOGTIME = #{logtime,jdbcType=DATE}
+    where LOGID = #{logid,jdbcType=DECIMAL}
+  </update>
+</mapper>

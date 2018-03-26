@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.TeventMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Tevent" >
+    <id column="EVENTID" property="eventid" jdbcType="DECIMAL" />
+    <result column="EVENTADDR" property="eventaddr" jdbcType="DECIMAL" />
+    <result column="EVENTNAME" property="eventname" jdbcType="VARCHAR" />
+    <result column="EVENTTYPE" property="eventtype" jdbcType="VARCHAR" />
+    <result column="ALARMNEEDED" property="alarmneeded" jdbcType="CHAR" />
+    <result column="EVENTDESC" property="eventdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="tsms.base.zl.pojo.po.Tevent" extends="BaseResultMap" >
+    <result column="EMAILLIST" property="emaillist" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EVENTID, EVENTADDR, EVENTNAME, EVENTTYPE, ALARMNEEDED, EVENTDESC
+  </sql>
+  <sql id="Blob_Column_List" >
+    EMAILLIST
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="tsms.base.zl.pojo.po.TeventExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TSMS.TEVENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.TeventExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.TEVENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TSMS.TEVENT
+    where EVENTID = #{eventid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.TEVENT
+    where EVENTID = #{eventid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.TeventExample" >
+    delete from TSMS.TEVENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.Tevent" >
+    insert into TSMS.TEVENT (EVENTID, EVENTADDR, EVENTNAME, 
+      EVENTTYPE, ALARMNEEDED, EVENTDESC, 
+      EMAILLIST)
+    values (#{eventid,jdbcType=DECIMAL}, #{eventaddr,jdbcType=DECIMAL}, #{eventname,jdbcType=VARCHAR}, 
+      #{eventtype,jdbcType=VARCHAR}, #{alarmneeded,jdbcType=CHAR}, #{eventdesc,jdbcType=VARCHAR}, 
+      #{emaillist,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.Tevent" >
+    insert into TSMS.TEVENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eventid != null" >
+        EVENTID,
+      </if>
+      <if test="eventaddr != null" >
+        EVENTADDR,
+      </if>
+      <if test="eventname != null" >
+        EVENTNAME,
+      </if>
+      <if test="eventtype != null" >
+        EVENTTYPE,
+      </if>
+      <if test="alarmneeded != null" >
+        ALARMNEEDED,
+      </if>
+      <if test="eventdesc != null" >
+        EVENTDESC,
+      </if>
+      <if test="emaillist != null" >
+        EMAILLIST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eventid != null" >
+        #{eventid,jdbcType=DECIMAL},
+      </if>
+      <if test="eventaddr != null" >
+        #{eventaddr,jdbcType=DECIMAL},
+      </if>
+      <if test="eventname != null" >
+        #{eventname,jdbcType=VARCHAR},
+      </if>
+      <if test="eventtype != null" >
+        #{eventtype,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmneeded != null" >
+        #{alarmneeded,jdbcType=CHAR},
+      </if>
+      <if test="eventdesc != null" >
+        #{eventdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="emaillist != null" >
+        #{emaillist,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.TeventExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.TEVENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.TEVENT
+    <set >
+      <if test="record.eventid != null" >
+        EVENTID = #{record.eventid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eventaddr != null" >
+        EVENTADDR = #{record.eventaddr,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eventname != null" >
+        EVENTNAME = #{record.eventname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventtype != null" >
+        EVENTTYPE = #{record.eventtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmneeded != null" >
+        ALARMNEEDED = #{record.alarmneeded,jdbcType=CHAR},
+      </if>
+      <if test="record.eventdesc != null" >
+        EVENTDESC = #{record.eventdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emaillist != null" >
+        EMAILLIST = #{record.emaillist,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update TSMS.TEVENT
+    set EVENTID = #{record.eventid,jdbcType=DECIMAL},
+      EVENTADDR = #{record.eventaddr,jdbcType=DECIMAL},
+      EVENTNAME = #{record.eventname,jdbcType=VARCHAR},
+      EVENTTYPE = #{record.eventtype,jdbcType=VARCHAR},
+      ALARMNEEDED = #{record.alarmneeded,jdbcType=CHAR},
+      EVENTDESC = #{record.eventdesc,jdbcType=VARCHAR},
+      EMAILLIST = #{record.emaillist,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.TEVENT
+    set EVENTID = #{record.eventid,jdbcType=DECIMAL},
+      EVENTADDR = #{record.eventaddr,jdbcType=DECIMAL},
+      EVENTNAME = #{record.eventname,jdbcType=VARCHAR},
+      EVENTTYPE = #{record.eventtype,jdbcType=VARCHAR},
+      ALARMNEEDED = #{record.alarmneeded,jdbcType=CHAR},
+      EVENTDESC = #{record.eventdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.Tevent" >
+    update TSMS.TEVENT
+    <set >
+      <if test="eventaddr != null" >
+        EVENTADDR = #{eventaddr,jdbcType=DECIMAL},
+      </if>
+      <if test="eventname != null" >
+        EVENTNAME = #{eventname,jdbcType=VARCHAR},
+      </if>
+      <if test="eventtype != null" >
+        EVENTTYPE = #{eventtype,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmneeded != null" >
+        ALARMNEEDED = #{alarmneeded,jdbcType=CHAR},
+      </if>
+      <if test="eventdesc != null" >
+        EVENTDESC = #{eventdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="emaillist != null" >
+        EMAILLIST = #{emaillist,jdbcType=CLOB},
+      </if>
+    </set>
+    where EVENTID = #{eventid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="tsms.base.zl.pojo.po.Tevent" >
+    update TSMS.TEVENT
+    set EVENTADDR = #{eventaddr,jdbcType=DECIMAL},
+      EVENTNAME = #{eventname,jdbcType=VARCHAR},
+      EVENTTYPE = #{eventtype,jdbcType=VARCHAR},
+      ALARMNEEDED = #{alarmneeded,jdbcType=CHAR},
+      EVENTDESC = #{eventdesc,jdbcType=VARCHAR},
+      EMAILLIST = #{emaillist,jdbcType=CLOB}
+    where EVENTID = #{eventid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Tevent" >
+    update TSMS.TEVENT
+    set EVENTADDR = #{eventaddr,jdbcType=DECIMAL},
+      EVENTNAME = #{eventname,jdbcType=VARCHAR},
+      EVENTTYPE = #{eventtype,jdbcType=VARCHAR},
+      ALARMNEEDED = #{alarmneeded,jdbcType=CHAR},
+      EVENTDESC = #{eventdesc,jdbcType=VARCHAR}
+    where EVENTID = #{eventid,jdbcType=DECIMAL}
+  </update>
+</mapper>

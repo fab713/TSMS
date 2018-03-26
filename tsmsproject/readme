@@ -1,0 +1,18 @@
+主工程模块。
+主要代码都放在这里。
+groupId=tsms(工程名称)
+artifactId=tsmsutil(模块名称)
+version=0.0.1-SNAPSHOT
+1.resources下各种配置文件
+  mybatis
+      
+  Spring下
+       Springmvc的配置文件:SrpingMVC的主要组件的配置。（控制器、视图解析器、异常处理、文件上传）
+       applicationContent文件：联系上下文，主要是Spring的配置文件,加载SpringMvc配置文件、数据源配置、事务配置
+       applicationContent-xx-dao文件
+       applicationContent-xx-service文件
+   db.properties数据库配置文件
+   log4j.properties日志文件
+  
+  
+  

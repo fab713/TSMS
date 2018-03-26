@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!-- 定义一个基础模板页 -->
+<definition name="base.definition" template="/WEB-INF/jsp/title/template.jsp">
+	</definition>
+	<!-- 不继承直接引用也行 -->
+	<!-- <definition name="CustomerForm" extends="base.definition">
+		<put-attribute name="title" value="HHHHHHHHHHHH" />
+		<put-attribute name="header" value="/WEB-INF/jsp/title/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/title/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/title/CustomerForm.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/title/footer.jsp" />
+	</definition> -->
+	<definition name=".mainlayout" template="/WEB-INF/jsp/layout/mainlayout.jsp">
+		<put-attribute name="nocache" type="string"  value="false" />
+		<put-attribute name="title"  type="string" />
+		<put-attribute name="onload"  type="string"/>
+		<put-attribute name="onclick"  type="string"/>
+       <put-attribute name="calendar"  type="string" value="false" />
+       <put-attribute name="content"  type="string"/>
+       <put-attribute name="mainleft"  type="string"/>
+        <put-attribute name="action"  type="string"/>
+        <put-attribute name="notShowError"  type="string" value="true"/>
+		<put-list-attribute name="styles"></put-list-attribute>
+		<put-list-attribute name="scripts"></put-list-attribute>
+		<put-list-attribute name="navpath"></put-list-attribute>
+		<put-list-attribute name="navlinks"></put-list-attribute>
+		<put-list-attribute name="pagelinks"></put-list-attribute>
+	</definition>
+<!-- 	<definition name=".loginlayout"  template="/WEB-INF/jsp/layout/loginlayout.jsp">
+		<put-attribute name="nocache"  type="string" value="false" />
+		<put-attribute name="title"  type="string"/>
+		<put-attribute name="onload"  type="string"/>
+		<put-attribute name="onclick"  type="string"/>
+       <put-attribute name="calendar"  type="string" value="false"/>
+        <put-attribute name="action"  type="string"/>
+        <put-attribute name="notShowError" type="string"  value="true"/>
+		<put-list-attribute name="styles"></put-list-attribute>
+		<put-list-attribute name="scripts"></put-list-attribute>
+		<put-list-attribute name="navpath"></put-list-attribute>
+		<put-list-attribute name="navlinks"></put-list-attribute>
+		<put-list-attribute name="pagelinks"></put-list-attribute>
+	</definition> -->
+	<definition name="loginfirstpagelayout"  template="/WEB-INF/jsp/layout/loginfirstpagelayout.jsp">
+	    <put-attribute name="nocache" type="string" value="false"/>
+        <put-attribute  name="title" type="string"/>
+        <put-attribute  name="onload" type="string"/>
+        <put-attribute name="onclick" type="string"/>
+		<put-attribute name="calendar" type="string" value="false"/>
+        <put-attribute name="action" type="string"/>
+        <put-attribute name="notShowError" type="string" value="true"/>
+        <put-list-attribute  name="styles"/>
+        <put-list-attribute  name="scripts"/>
+		<put-list-attribute  name="navpath"/>
+		<put-list-attribute  name="navlinks"/>
+		<put-list-attribute  name="pagelinks"/>
+	</definition>
+	<!-- using frame begin -->
+<definition name=".mainlayoutwithframe" template="/WEB-INF/jsp/layout/mainlayoutframe.jsp">
+		<put-attribute name="title" type="string"/>
+		<put-attribute name="leftFrame" type="string"/>
+		<put-attribute name="contentFrame" type="string"  value="defaultcontent.do" />
+	</definition>
+	<definition name=".contentinframe" template="/WEB-INF/jsp/layout/contentinframe.jsp">
+		<put-attribute name="nocache" type="string"  value="false" />
+		<put-attribute name="title" type="string" /> 
+		<put-attribute name="onload" type="string"/>
+		<put-attribute name="onclick" type="string"/>
+		<put-attribute name="calendar"  type="string"  value="false" />
+		<put-attribute name="content" type="string"/>
+		<put-attribute name="action" type="string" />
+		<put-attribute name="notShowError"  type="string" value="true" />
+		<put-list-attribute name="styles"></put-list-attribute>
+		<put-list-attribute name="scripts"></put-list-attribute>
+		<put-list-attribute name="navpath"></put-list-attribute>
+		<put-list-attribute name="navlinks"></put-list-attribute>
+		<put-list-attribute name="pagelinks"></put-list-attribute>
+	</definition>
+	<definition name=".defalutcontentinframe" extends=".contentinframe">
+		<put-attribute name="title" value="" />
+		<put-attribute name="content" value="/WEB-INF/jsp/layout/defaultcontentinframe.jsp" />
+		<put-attribute name="action" value="defaultcontent.do" />
+		<put-list-attribute name="navpath"></put-list-attribute>
+		<put-list-attribute name="navlinks"></put-list-attribute>
+	</definition>
+<!-- 	using frame end Global Error -->
+<!-- 	<definition name=".global.error" extends=".loginlayout">
+		<put-attribute name="title" value="global.error.title" />
+		<put-attribute name="content" value="/WEB-INF/jsp/common/global/error.jsp" />
+	</definition> -->
+	
+	 <!-- add by fab 20180226 test start -->   
+<!--     <definition name="defaultTemplate" template="/WEB-INF/jsp/common/layout.jsp">   
+        <put-attribute name="title" value="布局页" type="string" />  
+    </definition> 
+    <definition name="CustomerForm" extends="defaultTemplate">
+	</definition> -->
+     <!-- add by fab 20180226 test end -->
+</tiles-definitions>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.FunctioninfoMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Functioninfo" >
+    <id column="FUNCTIONINFOID" property="functioninfoid" jdbcType="DECIMAL" />
+    <result column="FUN_FUNCTIONINFOID" property="funFunctioninfoid" jdbcType="DECIMAL" />
+    <result column="FUNCTIONINFONAME" property="functioninfoname" jdbcType="VARCHAR" />
+    <result column="FUNCTIONINFODESC" property="functioninfodesc" jdbcType="VARCHAR" />
+    <result column="FUNCTIONINFOURL" property="functioninfourl" jdbcType="VARCHAR" />
+    <result column="ISDATAACESS" property="isdataacess" jdbcType="CHAR" />
+    <result column="ISSHORTCUT" property="isshortcut" jdbcType="CHAR" />
+    <result column="ISMENUITEM" property="ismenuitem" jdbcType="CHAR" />
+    <result column="OTHERURL" property="otherurl" jdbcType="VARCHAR" />
+    <result column="ISMAKERFUNC" property="ismakerfunc" jdbcType="CHAR" />
+    <result column="ISLOGFUNC" property="islogfunc" jdbcType="CHAR" />
+    <result column="ISINPUTRELATION" property="isinputrelation" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FUNCTIONINFOID, FUN_FUNCTIONINFOID, FUNCTIONINFONAME, FUNCTIONINFODESC, FUNCTIONINFOURL, 
+    ISDATAACESS, ISSHORTCUT, ISMENUITEM, OTHERURL, ISMAKERFUNC, ISLOGFUNC, ISINPUTRELATION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.FunctioninfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.FUNCTIONINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TSMS.FUNCTIONINFO
+    where FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.FUNCTIONINFO
+    where FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.FunctioninfoExample" >
+    delete from TSMS.FUNCTIONINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.Functioninfo" >
+    insert into TSMS.FUNCTIONINFO (FUNCTIONINFOID, FUN_FUNCTIONINFOID, 
+      FUNCTIONINFONAME, FUNCTIONINFODESC, FUNCTIONINFOURL, 
+      ISDATAACESS, ISSHORTCUT, ISMENUITEM, 
+      OTHERURL, ISMAKERFUNC, ISLOGFUNC, 
+      ISINPUTRELATION)
+    values (#{functioninfoid,jdbcType=DECIMAL}, #{funFunctioninfoid,jdbcType=DECIMAL}, 
+      #{functioninfoname,jdbcType=VARCHAR}, #{functioninfodesc,jdbcType=VARCHAR}, #{functioninfourl,jdbcType=VARCHAR}, 
+      #{isdataacess,jdbcType=CHAR}, #{isshortcut,jdbcType=CHAR}, #{ismenuitem,jdbcType=CHAR}, 
+      #{otherurl,jdbcType=VARCHAR}, #{ismakerfunc,jdbcType=CHAR}, #{islogfunc,jdbcType=CHAR}, 
+      #{isinputrelation,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.Functioninfo" >
+    insert into TSMS.FUNCTIONINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="functioninfoid != null" >
+        FUNCTIONINFOID,
+      </if>
+      <if test="funFunctioninfoid != null" >
+        FUN_FUNCTIONINFOID,
+      </if>
+      <if test="functioninfoname != null" >
+        FUNCTIONINFONAME,
+      </if>
+      <if test="functioninfodesc != null" >
+        FUNCTIONINFODESC,
+      </if>
+      <if test="functioninfourl != null" >
+        FUNCTIONINFOURL,
+      </if>
+      <if test="isdataacess != null" >
+        ISDATAACESS,
+      </if>
+      <if test="isshortcut != null" >
+        ISSHORTCUT,
+      </if>
+      <if test="ismenuitem != null" >
+        ISMENUITEM,
+      </if>
+      <if test="otherurl != null" >
+        OTHERURL,
+      </if>
+      <if test="ismakerfunc != null" >
+        ISMAKERFUNC,
+      </if>
+      <if test="islogfunc != null" >
+        ISLOGFUNC,
+      </if>
+      <if test="isinputrelation != null" >
+        ISINPUTRELATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="functioninfoid != null" >
+        #{functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="funFunctioninfoid != null" >
+        #{funFunctioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="functioninfoname != null" >
+        #{functioninfoname,jdbcType=VARCHAR},
+      </if>
+      <if test="functioninfodesc != null" >
+        #{functioninfodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="functioninfourl != null" >
+        #{functioninfourl,jdbcType=VARCHAR},
+      </if>
+      <if test="isdataacess != null" >
+        #{isdataacess,jdbcType=CHAR},
+      </if>
+      <if test="isshortcut != null" >
+        #{isshortcut,jdbcType=CHAR},
+      </if>
+      <if test="ismenuitem != null" >
+        #{ismenuitem,jdbcType=CHAR},
+      </if>
+      <if test="otherurl != null" >
+        #{otherurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ismakerfunc != null" >
+        #{ismakerfunc,jdbcType=CHAR},
+      </if>
+      <if test="islogfunc != null" >
+        #{islogfunc,jdbcType=CHAR},
+      </if>
+      <if test="isinputrelation != null" >
+        #{isinputrelation,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.FunctioninfoExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.FUNCTIONINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.FUNCTIONINFO
+    <set >
+      <if test="record.functioninfoid != null" >
+        FUNCTIONINFOID = #{record.functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.funFunctioninfoid != null" >
+        FUN_FUNCTIONINFOID = #{record.funFunctioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.functioninfoname != null" >
+        FUNCTIONINFONAME = #{record.functioninfoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functioninfodesc != null" >
+        FUNCTIONINFODESC = #{record.functioninfodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functioninfourl != null" >
+        FUNCTIONINFOURL = #{record.functioninfourl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdataacess != null" >
+        ISDATAACESS = #{record.isdataacess,jdbcType=CHAR},
+      </if>
+      <if test="record.isshortcut != null" >
+        ISSHORTCUT = #{record.isshortcut,jdbcType=CHAR},
+      </if>
+      <if test="record.ismenuitem != null" >
+        ISMENUITEM = #{record.ismenuitem,jdbcType=CHAR},
+      </if>
+      <if test="record.otherurl != null" >
+        OTHERURL = #{record.otherurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismakerfunc != null" >
+        ISMAKERFUNC = #{record.ismakerfunc,jdbcType=CHAR},
+      </if>
+      <if test="record.islogfunc != null" >
+        ISLOGFUNC = #{record.islogfunc,jdbcType=CHAR},
+      </if>
+      <if test="record.isinputrelation != null" >
+        ISINPUTRELATION = #{record.isinputrelation,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.FUNCTIONINFO
+    set FUNCTIONINFOID = #{record.functioninfoid,jdbcType=DECIMAL},
+      FUN_FUNCTIONINFOID = #{record.funFunctioninfoid,jdbcType=DECIMAL},
+      FUNCTIONINFONAME = #{record.functioninfoname,jdbcType=VARCHAR},
+      FUNCTIONINFODESC = #{record.functioninfodesc,jdbcType=VARCHAR},
+      FUNCTIONINFOURL = #{record.functioninfourl,jdbcType=VARCHAR},
+      ISDATAACESS = #{record.isdataacess,jdbcType=CHAR},
+      ISSHORTCUT = #{record.isshortcut,jdbcType=CHAR},
+      ISMENUITEM = #{record.ismenuitem,jdbcType=CHAR},
+      OTHERURL = #{record.otherurl,jdbcType=VARCHAR},
+      ISMAKERFUNC = #{record.ismakerfunc,jdbcType=CHAR},
+      ISLOGFUNC = #{record.islogfunc,jdbcType=CHAR},
+      ISINPUTRELATION = #{record.isinputrelation,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.Functioninfo" >
+    update TSMS.FUNCTIONINFO
+    <set >
+      <if test="funFunctioninfoid != null" >
+        FUN_FUNCTIONINFOID = #{funFunctioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="functioninfoname != null" >
+        FUNCTIONINFONAME = #{functioninfoname,jdbcType=VARCHAR},
+      </if>
+      <if test="functioninfodesc != null" >
+        FUNCTIONINFODESC = #{functioninfodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="functioninfourl != null" >
+        FUNCTIONINFOURL = #{functioninfourl,jdbcType=VARCHAR},
+      </if>
+      <if test="isdataacess != null" >
+        ISDATAACESS = #{isdataacess,jdbcType=CHAR},
+      </if>
+      <if test="isshortcut != null" >
+        ISSHORTCUT = #{isshortcut,jdbcType=CHAR},
+      </if>
+      <if test="ismenuitem != null" >
+        ISMENUITEM = #{ismenuitem,jdbcType=CHAR},
+      </if>
+      <if test="otherurl != null" >
+        OTHERURL = #{otherurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ismakerfunc != null" >
+        ISMAKERFUNC = #{ismakerfunc,jdbcType=CHAR},
+      </if>
+      <if test="islogfunc != null" >
+        ISLOGFUNC = #{islogfunc,jdbcType=CHAR},
+      </if>
+      <if test="isinputrelation != null" >
+        ISINPUTRELATION = #{isinputrelation,jdbcType=CHAR},
+      </if>
+    </set>
+    where FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Functioninfo" >
+    update TSMS.FUNCTIONINFO
+    set FUN_FUNCTIONINFOID = #{funFunctioninfoid,jdbcType=DECIMAL},
+      FUNCTIONINFONAME = #{functioninfoname,jdbcType=VARCHAR},
+      FUNCTIONINFODESC = #{functioninfodesc,jdbcType=VARCHAR},
+      FUNCTIONINFOURL = #{functioninfourl,jdbcType=VARCHAR},
+      ISDATAACESS = #{isdataacess,jdbcType=CHAR},
+      ISSHORTCUT = #{isshortcut,jdbcType=CHAR},
+      ISMENUITEM = #{ismenuitem,jdbcType=CHAR},
+      OTHERURL = #{otherurl,jdbcType=VARCHAR},
+      ISMAKERFUNC = #{ismakerfunc,jdbcType=CHAR},
+      ISLOGFUNC = #{islogfunc,jdbcType=CHAR},
+      ISINPUTRELATION = #{isinputrelation,jdbcType=CHAR}
+    where FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL}
+  </update>
+</mapper>

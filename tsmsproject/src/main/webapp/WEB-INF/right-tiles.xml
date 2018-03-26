@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	                                       <!-- 登录页面 start -->
+<!-- 	 <definition name=".right.login.login" extends=".loginlayout">
+		<put-attribute name="title" value="title.right.login"/>
+		<put-attribute name="content" value="/WEB-INF/jsp/right/login.jsp"/>
+		<put-attribute name="action" value="/right/login/login.do"/>
+	</definition> -->
+	                                         <!-- 登录页面 end-->
+	                                          <!-- 首页面 start -->
+	<definition name="right.login.loginfirstpage" extends="loginfirstpagelayout">
+		 <put-attribute name="title" value="1234455"/>
+		 <put-attribute name="content" value="/WEB-INF/jsp/base/loginfirstpage.jsp"/>
+         <put-attribute name="calendar" value="true"/>
+		<put-attribute name="action" value="/index/first"/>
+		<put-attribute name="mainleft" value="/WEB-INF/jsp/layout/submenusystem.jsp"/>
+	</definition>
+	                                          <!-- 首页面 end -->
+</tiles-definitions>

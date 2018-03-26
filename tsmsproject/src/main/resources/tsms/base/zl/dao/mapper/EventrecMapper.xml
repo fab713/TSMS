@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.EventrecMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Eventrec" >
+    <id column="EVENTRECID" property="eventrecid" jdbcType="DECIMAL" />
+    <result column="EVENTID" property="eventid" jdbcType="DECIMAL" />
+    <result column="EVENTTIME" property="eventtime" jdbcType="DATE" />
+    <result column="SENDTIME" property="sendtime" jdbcType="DATE" />
+    <result column="SENDSTATE" property="sendstate" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="tsms.base.zl.pojo.po.EventrecWithBLOBs" extends="BaseResultMap" >
+    <result column="EVENTRECEMAILLIST" property="eventrecemaillist" jdbcType="CLOB" />
+    <result column="SENDDESC" property="senddesc" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EVENTRECID, EVENTID, EVENTTIME, SENDTIME, SENDSTATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    EVENTRECEMAILLIST, SENDDESC
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="tsms.base.zl.pojo.po.EventrecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TSMS.EVENTREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.EventrecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.EVENTREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TSMS.EVENTREC
+    where EVENTRECID = #{eventrecid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.EVENTREC
+    where EVENTRECID = #{eventrecid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.EventrecExample" >
+    delete from TSMS.EVENTREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.EventrecWithBLOBs" >
+    insert into TSMS.EVENTREC (EVENTRECID, EVENTID, EVENTTIME, 
+      SENDTIME, SENDSTATE, EVENTRECEMAILLIST, 
+      SENDDESC)
+    values (#{eventrecid,jdbcType=DECIMAL}, #{eventid,jdbcType=DECIMAL}, #{eventtime,jdbcType=DATE}, 
+      #{sendtime,jdbcType=DATE}, #{sendstate,jdbcType=DECIMAL}, #{eventrecemaillist,jdbcType=CLOB}, 
+      #{senddesc,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.EventrecWithBLOBs" >
+    insert into TSMS.EVENTREC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eventrecid != null" >
+        EVENTRECID,
+      </if>
+      <if test="eventid != null" >
+        EVENTID,
+      </if>
+      <if test="eventtime != null" >
+        EVENTTIME,
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME,
+      </if>
+      <if test="sendstate != null" >
+        SENDSTATE,
+      </if>
+      <if test="eventrecemaillist != null" >
+        EVENTRECEMAILLIST,
+      </if>
+      <if test="senddesc != null" >
+        SENDDESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eventrecid != null" >
+        #{eventrecid,jdbcType=DECIMAL},
+      </if>
+      <if test="eventid != null" >
+        #{eventid,jdbcType=DECIMAL},
+      </if>
+      <if test="eventtime != null" >
+        #{eventtime,jdbcType=DATE},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=DATE},
+      </if>
+      <if test="sendstate != null" >
+        #{sendstate,jdbcType=DECIMAL},
+      </if>
+      <if test="eventrecemaillist != null" >
+        #{eventrecemaillist,jdbcType=CLOB},
+      </if>
+      <if test="senddesc != null" >
+        #{senddesc,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.EventrecExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.EVENTREC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.EVENTREC
+    <set >
+      <if test="record.eventrecid != null" >
+        EVENTRECID = #{record.eventrecid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eventid != null" >
+        EVENTID = #{record.eventid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eventtime != null" >
+        EVENTTIME = #{record.eventtime,jdbcType=DATE},
+      </if>
+      <if test="record.sendtime != null" >
+        SENDTIME = #{record.sendtime,jdbcType=DATE},
+      </if>
+      <if test="record.sendstate != null" >
+        SENDSTATE = #{record.sendstate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.eventrecemaillist != null" >
+        EVENTRECEMAILLIST = #{record.eventrecemaillist,jdbcType=CLOB},
+      </if>
+      <if test="record.senddesc != null" >
+        SENDDESC = #{record.senddesc,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update TSMS.EVENTREC
+    set EVENTRECID = #{record.eventrecid,jdbcType=DECIMAL},
+      EVENTID = #{record.eventid,jdbcType=DECIMAL},
+      EVENTTIME = #{record.eventtime,jdbcType=DATE},
+      SENDTIME = #{record.sendtime,jdbcType=DATE},
+      SENDSTATE = #{record.sendstate,jdbcType=DECIMAL},
+      EVENTRECEMAILLIST = #{record.eventrecemaillist,jdbcType=CLOB},
+      SENDDESC = #{record.senddesc,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.EVENTREC
+    set EVENTRECID = #{record.eventrecid,jdbcType=DECIMAL},
+      EVENTID = #{record.eventid,jdbcType=DECIMAL},
+      EVENTTIME = #{record.eventtime,jdbcType=DATE},
+      SENDTIME = #{record.sendtime,jdbcType=DATE},
+      SENDSTATE = #{record.sendstate,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.EventrecWithBLOBs" >
+    update TSMS.EVENTREC
+    <set >
+      <if test="eventid != null" >
+        EVENTID = #{eventid,jdbcType=DECIMAL},
+      </if>
+      <if test="eventtime != null" >
+        EVENTTIME = #{eventtime,jdbcType=DATE},
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME = #{sendtime,jdbcType=DATE},
+      </if>
+      <if test="sendstate != null" >
+        SENDSTATE = #{sendstate,jdbcType=DECIMAL},
+      </if>
+      <if test="eventrecemaillist != null" >
+        EVENTRECEMAILLIST = #{eventrecemaillist,jdbcType=CLOB},
+      </if>
+      <if test="senddesc != null" >
+        SENDDESC = #{senddesc,jdbcType=CLOB},
+      </if>
+    </set>
+    where EVENTRECID = #{eventrecid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="tsms.base.zl.pojo.po.EventrecWithBLOBs" >
+    update TSMS.EVENTREC
+    set EVENTID = #{eventid,jdbcType=DECIMAL},
+      EVENTTIME = #{eventtime,jdbcType=DATE},
+      SENDTIME = #{sendtime,jdbcType=DATE},
+      SENDSTATE = #{sendstate,jdbcType=DECIMAL},
+      EVENTRECEMAILLIST = #{eventrecemaillist,jdbcType=CLOB},
+      SENDDESC = #{senddesc,jdbcType=CLOB}
+    where EVENTRECID = #{eventrecid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Eventrec" >
+    update TSMS.EVENTREC
+    set EVENTID = #{eventid,jdbcType=DECIMAL},
+      EVENTTIME = #{eventtime,jdbcType=DATE},
+      SENDTIME = #{sendtime,jdbcType=DATE},
+      SENDSTATE = #{sendstate,jdbcType=DECIMAL}
+    where EVENTRECID = #{eventrecid,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Userinfo" >
+    <id column="USERID" property="userid" jdbcType="DECIMAL" />
+    <result column="USERLOGINID" property="userloginid" jdbcType="VARCHAR" />
+    <result column="USERPASS" property="userpass" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="USERSEX" property="usersex" jdbcType="CHAR" />
+    <result column="WORKPHONE" property="workphone" jdbcType="VARCHAR" />
+    <result column="CELLPHONE" property="cellphone" jdbcType="VARCHAR" />
+    <result column="MEBMERID" property="mebmerid" jdbcType="VARCHAR" />
+    <result column="USEREMAIL" property="useremail" jdbcType="VARCHAR" />
+    <result column="ISMAKERUSER" property="ismakeruser" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USERID, USERLOGINID, USERPASS, USERNAME, USERSEX, WORKPHONE, CELLPHONE, MEBMERID, 
+    USEREMAIL, ISMAKERUSER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.UserinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.USERINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TSMS.USERINFO
+    where USERID = #{userid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.USERINFO
+    where USERID = #{userid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.UserinfoExample" >
+    delete from TSMS.USERINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.Userinfo" >
+    insert into TSMS.USERINFO (USERID, USERLOGINID, USERPASS, 
+      USERNAME, USERSEX, WORKPHONE, 
+      CELLPHONE, MEBMERID, USEREMAIL, 
+      ISMAKERUSER)
+    values (#{userid,jdbcType=DECIMAL}, #{userloginid,jdbcType=VARCHAR}, #{userpass,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{usersex,jdbcType=CHAR}, #{workphone,jdbcType=VARCHAR}, 
+      #{cellphone,jdbcType=VARCHAR}, #{mebmerid,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, 
+      #{ismakeruser,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.Userinfo" >
+    insert into TSMS.USERINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="userloginid != null" >
+        USERLOGINID,
+      </if>
+      <if test="userpass != null" >
+        USERPASS,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="usersex != null" >
+        USERSEX,
+      </if>
+      <if test="workphone != null" >
+        WORKPHONE,
+      </if>
+      <if test="cellphone != null" >
+        CELLPHONE,
+      </if>
+      <if test="mebmerid != null" >
+        MEBMERID,
+      </if>
+      <if test="useremail != null" >
+        USEREMAIL,
+      </if>
+      <if test="ismakeruser != null" >
+        ISMAKERUSER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="userloginid != null" >
+        #{userloginid,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null" >
+        #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null" >
+        #{usersex,jdbcType=CHAR},
+      </if>
+      <if test="workphone != null" >
+        #{workphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mebmerid != null" >
+        #{mebmerid,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="ismakeruser != null" >
+        #{ismakeruser,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.UserinfoExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.USERINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.USERINFO
+    <set >
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userloginid != null" >
+        USERLOGINID = #{record.userloginid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpass != null" >
+        USERPASS = #{record.userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersex != null" >
+        USERSEX = #{record.usersex,jdbcType=CHAR},
+      </if>
+      <if test="record.workphone != null" >
+        WORKPHONE = #{record.workphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellphone != null" >
+        CELLPHONE = #{record.cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mebmerid != null" >
+        MEBMERID = #{record.mebmerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useremail != null" >
+        USEREMAIL = #{record.useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismakeruser != null" >
+        ISMAKERUSER = #{record.ismakeruser,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.USERINFO
+    set USERID = #{record.userid,jdbcType=DECIMAL},
+      USERLOGINID = #{record.userloginid,jdbcType=VARCHAR},
+      USERPASS = #{record.userpass,jdbcType=VARCHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      USERSEX = #{record.usersex,jdbcType=CHAR},
+      WORKPHONE = #{record.workphone,jdbcType=VARCHAR},
+      CELLPHONE = #{record.cellphone,jdbcType=VARCHAR},
+      MEBMERID = #{record.mebmerid,jdbcType=VARCHAR},
+      USEREMAIL = #{record.useremail,jdbcType=VARCHAR},
+      ISMAKERUSER = #{record.ismakeruser,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.Userinfo" >
+    update TSMS.USERINFO
+    <set >
+      <if test="userloginid != null" >
+        USERLOGINID = #{userloginid,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null" >
+        USERPASS = #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null" >
+        USERSEX = #{usersex,jdbcType=CHAR},
+      </if>
+      <if test="workphone != null" >
+        WORKPHONE = #{workphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mebmerid != null" >
+        MEBMERID = #{mebmerid,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        USEREMAIL = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="ismakeruser != null" >
+        ISMAKERUSER = #{ismakeruser,jdbcType=CHAR},
+      </if>
+    </set>
+    where USERID = #{userid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Userinfo" >
+    update TSMS.USERINFO
+    set USERLOGINID = #{userloginid,jdbcType=VARCHAR},
+      USERPASS = #{userpass,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      USERSEX = #{usersex,jdbcType=CHAR},
+      WORKPHONE = #{workphone,jdbcType=VARCHAR},
+      CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+      MEBMERID = #{mebmerid,jdbcType=VARCHAR},
+      USEREMAIL = #{useremail,jdbcType=VARCHAR},
+      ISMAKERUSER = #{ismakeruser,jdbcType=CHAR}
+    where USERID = #{userid,jdbcType=DECIMAL}
+  </update>
+</mapper>

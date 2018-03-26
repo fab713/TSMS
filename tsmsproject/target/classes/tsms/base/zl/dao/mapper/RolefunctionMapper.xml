@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.RolefunctionMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Rolefunction" >
+    <id column="ROLEFUNCTIONID" property="rolefunctionid" jdbcType="DECIMAL" />
+    <result column="FUNCTIONINFOID" property="functioninfoid" jdbcType="DECIMAL" />
+    <result column="ROLEID" property="roleid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ROLEFUNCTIONID, FUNCTIONINFOID, ROLEID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.RolefunctionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.ROLEFUNCTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TSMS.ROLEFUNCTION
+    where ROLEFUNCTIONID = #{rolefunctionid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.ROLEFUNCTION
+    where ROLEFUNCTIONID = #{rolefunctionid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.RolefunctionExample" >
+    delete from TSMS.ROLEFUNCTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.Rolefunction" >
+    insert into TSMS.ROLEFUNCTION (ROLEFUNCTIONID, FUNCTIONINFOID, ROLEID
+      )
+    values (#{rolefunctionid,jdbcType=DECIMAL}, #{functioninfoid,jdbcType=DECIMAL}, #{roleid,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.Rolefunction" >
+    insert into TSMS.ROLEFUNCTION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rolefunctionid != null" >
+        ROLEFUNCTIONID,
+      </if>
+      <if test="functioninfoid != null" >
+        FUNCTIONINFOID,
+      </if>
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rolefunctionid != null" >
+        #{rolefunctionid,jdbcType=DECIMAL},
+      </if>
+      <if test="functioninfoid != null" >
+        #{functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.RolefunctionExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.ROLEFUNCTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.ROLEFUNCTION
+    <set >
+      <if test="record.rolefunctionid != null" >
+        ROLEFUNCTIONID = #{record.rolefunctionid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.functioninfoid != null" >
+        FUNCTIONINFOID = #{record.functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleid != null" >
+        ROLEID = #{record.roleid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.ROLEFUNCTION
+    set ROLEFUNCTIONID = #{record.rolefunctionid,jdbcType=DECIMAL},
+      FUNCTIONINFOID = #{record.functioninfoid,jdbcType=DECIMAL},
+      ROLEID = #{record.roleid,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.Rolefunction" >
+    update TSMS.ROLEFUNCTION
+    <set >
+      <if test="functioninfoid != null" >
+        FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL},
+      </if>
+      <if test="roleid != null" >
+        ROLEID = #{roleid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ROLEFUNCTIONID = #{rolefunctionid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Rolefunction" >
+    update TSMS.ROLEFUNCTION
+    set FUNCTIONINFOID = #{functioninfoid,jdbcType=DECIMAL},
+      ROLEID = #{roleid,jdbcType=DECIMAL}
+    where ROLEFUNCTIONID = #{rolefunctionid,jdbcType=DECIMAL}
+  </update>
+</mapper>

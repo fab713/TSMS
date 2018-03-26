@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- setting配置 -->
+	
+	<!-- 配置mapper.xml文件具体的sql语句 -->
+	<mappers>
+	<mapper resource="/tsms/base/zl/dao/mapper/CommonSql.xml"/> 
+<!-- 	<mapper resource="/tsms/base/dao/mapper/EventrecMapper.xml"/>  -->
+<!-- 	<mapper resource="/tsms/base/dao/mapper/EventuserMapper.xml"/>  -->
+<!-- 	<mapper resource="/tsms/base/dao/mapper/FunctioninfoMapper.xml"/>  -->
+<!-- 	<mapper resource="/tsms/base/dao/mapper/RightMapper.xml"/>  -->
+<!-- 	<mapper resource="/tsms/base/dao/mapper/RolefunctionMapper.xml"/>  -->
+	<!-- <mapper resource="/tsms/base/dao/mapper/RoleMapper.xml"/>  -->
+<!-- 	<mapper resource="/tsms/base/dao/mapper/TeventMapper.xml"/> 
+	<mapper resource="/tsms/base/dao/mapper/UserinfoMapper.xml"/> 
+	<mapper resource="/tsms/base/dao/mapper/UserroleMapper.xml"/>  -->
+	</mappers> 
+</configuration>

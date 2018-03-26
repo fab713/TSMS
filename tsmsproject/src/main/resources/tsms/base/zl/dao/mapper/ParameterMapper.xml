@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tsms.base.zl.dao.mapper.ParameterMapper" >
+  <resultMap id="BaseResultMap" type="tsms.base.zl.pojo.po.Parameter" >
+    <id column="PARAMETERID" property="parameterid" jdbcType="DECIMAL" />
+    <result column="PARAMETERTYPE" property="parametertype" jdbcType="VARCHAR" />
+    <result column="PARAMETERCODE" property="parametercode" jdbcType="VARCHAR" />
+    <result column="PARAMETERDESC" property="parameterdesc" jdbcType="VARCHAR" />
+    <result column="PARAMETERVALUE" property="parametervalue" jdbcType="VARCHAR" />
+    <result column="PARAMETERDEFAULT" property="parameterdefault" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PARAMETERID, PARAMETERTYPE, PARAMETERCODE, PARAMETERDESC, PARAMETERVALUE, PARAMETERDEFAULT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="tsms.base.zl.pojo.po.ParameterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TSMS.PARAMETER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TSMS.PARAMETER
+    where PARAMETERID = #{parameterid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TSMS.PARAMETER
+    where PARAMETERID = #{parameterid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="tsms.base.zl.pojo.po.ParameterExample" >
+    delete from TSMS.PARAMETER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tsms.base.zl.pojo.po.Parameter" >
+    insert into TSMS.PARAMETER (PARAMETERID, PARAMETERTYPE, PARAMETERCODE, 
+      PARAMETERDESC, PARAMETERVALUE, PARAMETERDEFAULT
+      )
+    values (#{parameterid,jdbcType=DECIMAL}, #{parametertype,jdbcType=VARCHAR}, #{parametercode,jdbcType=VARCHAR}, 
+      #{parameterdesc,jdbcType=VARCHAR}, #{parametervalue,jdbcType=VARCHAR}, #{parameterdefault,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tsms.base.zl.pojo.po.Parameter" >
+    insert into TSMS.PARAMETER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parameterid != null" >
+        PARAMETERID,
+      </if>
+      <if test="parametertype != null" >
+        PARAMETERTYPE,
+      </if>
+      <if test="parametercode != null" >
+        PARAMETERCODE,
+      </if>
+      <if test="parameterdesc != null" >
+        PARAMETERDESC,
+      </if>
+      <if test="parametervalue != null" >
+        PARAMETERVALUE,
+      </if>
+      <if test="parameterdefault != null" >
+        PARAMETERDEFAULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parameterid != null" >
+        #{parameterid,jdbcType=DECIMAL},
+      </if>
+      <if test="parametertype != null" >
+        #{parametertype,jdbcType=VARCHAR},
+      </if>
+      <if test="parametercode != null" >
+        #{parametercode,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterdesc != null" >
+        #{parameterdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parametervalue != null" >
+        #{parametervalue,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterdefault != null" >
+        #{parameterdefault,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tsms.base.zl.pojo.po.ParameterExample" resultType="java.lang.Integer" >
+    select count(*) from TSMS.PARAMETER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TSMS.PARAMETER
+    <set >
+      <if test="record.parameterid != null" >
+        PARAMETERID = #{record.parameterid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parametertype != null" >
+        PARAMETERTYPE = #{record.parametertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parametercode != null" >
+        PARAMETERCODE = #{record.parametercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameterdesc != null" >
+        PARAMETERDESC = #{record.parameterdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parametervalue != null" >
+        PARAMETERVALUE = #{record.parametervalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameterdefault != null" >
+        PARAMETERDEFAULT = #{record.parameterdefault,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TSMS.PARAMETER
+    set PARAMETERID = #{record.parameterid,jdbcType=DECIMAL},
+      PARAMETERTYPE = #{record.parametertype,jdbcType=VARCHAR},
+      PARAMETERCODE = #{record.parametercode,jdbcType=VARCHAR},
+      PARAMETERDESC = #{record.parameterdesc,jdbcType=VARCHAR},
+      PARAMETERVALUE = #{record.parametervalue,jdbcType=VARCHAR},
+      PARAMETERDEFAULT = #{record.parameterdefault,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tsms.base.zl.pojo.po.Parameter" >
+    update TSMS.PARAMETER
+    <set >
+      <if test="parametertype != null" >
+        PARAMETERTYPE = #{parametertype,jdbcType=VARCHAR},
+      </if>
+      <if test="parametercode != null" >
+        PARAMETERCODE = #{parametercode,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterdesc != null" >
+        PARAMETERDESC = #{parameterdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parametervalue != null" >
+        PARAMETERVALUE = #{parametervalue,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterdefault != null" >
+        PARAMETERDEFAULT = #{parameterdefault,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAMETERID = #{parameterid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tsms.base.zl.pojo.po.Parameter" >
+    update TSMS.PARAMETER
+    set PARAMETERTYPE = #{parametertype,jdbcType=VARCHAR},
+      PARAMETERCODE = #{parametercode,jdbcType=VARCHAR},
+      PARAMETERDESC = #{parameterdesc,jdbcType=VARCHAR},
+      PARAMETERVALUE = #{parametervalue,jdbcType=VARCHAR},
+      PARAMETERDEFAULT = #{parameterdefault,jdbcType=VARCHAR}
+    where PARAMETERID = #{parameterid,jdbcType=DECIMAL}
+  </update>
+</mapper>
